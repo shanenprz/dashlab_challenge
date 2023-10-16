@@ -1,21 +1,20 @@
 form_name: MEDICAL EXAMINATION REPORT FOR LANDBASED OVERSEAS WORKERS
-last_name: Liam
-first_name: Apple
-mid_name: Lopez
-age: 32
-dob: 18/03/1991
-place_of_birth: Philippines
+last_name: Eleanor
+first_name: Anderson
+mid_name: James
+age: 22
+dob: 10/03/2001
+place_of_birth: Zac Piñas Philippines
 nationality: Filipino
-is_male: unselected
-is_female: selected
-is_single: unselected
-is_married: selected
+is_male: selected
+is_female: unselected
+is_single: selected
+is_married: unselected
 religion: Born Again
-address: SB St. Michael Northgate Subd. Molino IV Bacon City Cavite
-passport_num: 87 675 33
+address: 787 Anywhere St. Talon dos Las Piñas city
+passport_num: 1123345
 destination: Japan
-position: Technician
-employer: Amikor
+position: manage
 is_head_injury_yes: unselected
 is_head_injury_no: selected
 is_frequent_headache_yes: unselected
@@ -58,7 +57,6 @@ is_abdominal_disorder_yes: unselected
 is_abdominal_disorder_no: selected
 is_gyna_disorder_yes: unselected
 is_gyna_disorder_no: selected
-date_last_menstruation: 22/09/2023
 is_bladder_disorder_yes: unselected
 is_bladder_disorder_no: selected
 is_back_injury_yes: unselected
@@ -73,10 +71,12 @@ is_schistosomiasis_yes: unselected
 is_schistosomiasis_no: selected
 is_asthma_yes: unselected
 is_asthma_no: selected
-is_allergies_yes: unselected
-is_allergies_no: selected
-is_operation_yes: unselected
-is_operation_no: selected
+is_allergies_yes: selected
+is_allergies_no: unselected
+allergies: Peanut
+is_operation_yes: selected
+is_operation_no: unselected
+operation: Hand Lach
 is_signed_of_as_sick_yes: unselected
 is_signed_of_as_sick_no: selected
 is_hospitalized_yes: unselected
@@ -89,22 +89,21 @@ is_med_prob_yes: unselected
 is_med_prob_no: selected
 feel_fit_yes: unselected
 feel_fit_no: selected
-is_allergic_medication_yes: selected
+is_allergic_medication_yes: unselected
 is_allergic_medication_no: selected
-medication_allergy: Aspirin, Mayan, Menorphin
 is_taking_medication_yes: unselected
 is_taking_medication_no: selected
-height: 165
-weight: 70
-blood_pressure: 76 (mm Hg) 180 (mm Hg)
-pulse_rate: 70/min
-rhythm: regular
-respiration: 26/min
-bmi: 20
-far_vision_uncorrected: 20/40 JOS 20/30
-far_vision_corrected: 20/ 60 | OS 20/76
-near_vision_uncorrected: 10/20 /05/ 3At
-near_vision_corrected: 70/80 | 051 10190
+height: 170
+weight: 60
+blood_pressure: 120 (mm Hg) 80 (mm Hg)
+pulse_rate: 1/min
+rhythm: Regular
+respiration: 6 /min
+bmi: 25
+far_vision_uncorrected: 20/20 20/10
+far_vision_corrected: 20/ 30 20/40
+near_vision_uncorrected: 10/20 30/20
+near_vision_corrected: 6/7 9 /10
 color_vision_adequate: selected
 color_vision_defective: unselected
 hear_ear_right_adquate: selected
@@ -131,15 +130,18 @@ is_urinary_system_normal: selected
 is_genitals_normal: selected
 is_extremities_normal: selected
 is_reflexes_normal: selected
-is_dental_normal: selected
-is_xray_normal: selected
-is_xray_with_findings: unselected
+is_dental_normal: unselected
+dental_findings: Bleeding VIDAS
+is_xray_normal: unselected
+is_xray_with_findings: selected
+x-ray_findings: PV
 is_ecg_normal: selected
 is_ecg_with_findings: unselected
 is_cbc_normal: selected
 is_cbc_with_findings: unselected
-is_urinalysis_normal: selected
-is_urinalysis_with_findings: unselected
+is_urinalysis_normal: unselected
+is_urinalysis_with_findings: selected
+urinalysis_findings: E
 is_stool_normal: selected
 is_stool_with_findings: unselected
 is_hepa_reactive: selected
@@ -151,7 +153,7 @@ is_rpr_non-reactive: unselected
 blood_type: 0
 is_psycho_normal: selected
 is_psycho_for_eval: unselected
-addtional_test: Liver Function test
+addtional_test: Blood Chemesties
 basic_doh_med_exam_pass: selected
 is_basic_doh_exam_fail: unselected
 is_additional_lab_pass: selected
@@ -162,36 +164,34 @@ is_fit: selected
 is_unfit: unselected
 date_med_exm: 12/10/2023
 date_med_expire: 12/10/2024
-med_exam_report_no: 487
-physician: Dr. Olivia Rodrigues
-license_no: 2787713
-clinic_address: 8B St. Nicolas Alabany Javote R.d Was Piñas City
-clinic_name: Clinic1
+med_exam_report_no: 411
+physician: DR. Olivia Rodriguez
+license_no: 2178477
+clinic_address: Alabang Zapote Road Las Pintas City
+clinic_name: Clinic
 date_sign: 12/10/2023
-back_findings: None
-dental_findings: None
-ecg_findings: None
-heart_findings: None
-urinalysis_findings: None
+genito_findings: None
+chest_findings: None
+cbc_findings: None
+speed_findings: None
 pupils_findings: None
+neck_findings: None
+extremities_findings: None
+nose_sinus_findings: None
+skin_findings: None
+heart_findings: None
+lungs_findings: None
 mouth_throat_findings: None
 ears_findings: None
-x-ray_findings: None
+back_findings: None
 medications: None
-extremities_findings: None
-speed_findings: None
-cbc_findings: None
-lungs_findings: None
-head_neck_scalp_findings: None
-allergies: None
-eyes_external_findings: None
-skin_findings: None
-chest_findings: None
-nose_sinus_findings: None
-genito_findings: None
-operation: None
 stool_findings: None
-anus_rectum_findings: None
-neck_findings: None
 genitals_findings: None
+anus_rectum_findings: None
+eyes_external_findings: None
+employer: None
+date_last_menstruation: None
+ecg_findings: None
+head_neck_scalp_findings: None
+medication_allergy: None
 abdomen_findings: None

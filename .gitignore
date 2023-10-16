@@ -1,8 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/dotenv,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotenv,venv
 
-hiv_cert/
-med_cert_seafarers/
+# hiv_cert/
+# med_cert_seafarers/
 
 ### dotenv ###
 .env
