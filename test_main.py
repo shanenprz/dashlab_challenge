@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 # HIV Certificate 
-file_path = 'output_csv\hiv_cert\combined_data_hiv_cert.csv'
+file_path = 'output_csv01\hiv_cert\combined_data_hiv_cert.csv'
 hiv_cert = DataCleaning(file_path)
 column_mapping = {
     'result': {'nonreactive': 'nonreactive', 'reactive': 'reactive'},
@@ -20,7 +20,7 @@ hiv_cert.create_csv(desired_columns_order, 'cleaned_hiv_record.csv')
 # ---------------------------------------------------------------------------------- #
 
 # Landbase Medical Certificate
-file_path = 'output_csv\med_cert_landbase\combined_data_med_cert_landbase.csv'
+file_path = 'output_csv01\med_cert_landbase\combined_data_med_cert_landbase.csv'
 landbase_certificate = DataCleaning(file_path)
 column_mapping = {
     'gender': {'is_male': 'Male', 'is_female': 'Female'},
@@ -45,7 +45,7 @@ landbase_certificate.create_csv(desired_columns_order, 'cleaned_landbase_cert_re
 # ---------------------------------------------------------------------------------- #
 
 # Seabase Medical Certificate
-file_path = 'output_csv\med_cert_seafarers\combined_data_med_cert_seafarers.csv'
+file_path = 'output_csv01\med_cert_seafarers\combined_data_med_cert_seafarers.csv'
 seabase_certificate = DataCleaning(file_path)
 column_mapping = {
     'gender': {'is_male': 'Male', 'is_female': 'Female'},
@@ -79,7 +79,7 @@ seabase_certificate.create_csv(desired_columns_order, 'cleaned_seabase_cert_reco
 # ---------------------------------------------------------------------------------- #
 
 # Landbase Medical Exam
-file_path = 'output_csv\med_exam_landbase\combined_data_med_exam_landbase.csv'
+file_path = 'output_csv01\med_exam_landbase\combined_data_med_exam_landbase.csv'
 landbase_exam = DataCleaning(file_path)
 gender_and_status = {
     'gender': {'is_male': 'Male', 'is_female': 'Female'},
@@ -221,7 +221,7 @@ landbase_exam.create_csv(desired_columns_order, 'cleaned_landbase_exam_record.cs
 # ---------------------------------------------------------------------------------- #
 
 #Seabase Medical Exam
-file_path = 'output_csv\med_exam_seafarers\combined_data_med_exam_seafarers.csv'
+file_path = 'output_csv01\med_exam_seafarers\combined_data_med_exam_seafarers.csv'
 seabase_exam = DataCleaning(file_path)
 gender_and_status = {
     'gender': {'is_male': 'Male', 'is_female': 'Female'},

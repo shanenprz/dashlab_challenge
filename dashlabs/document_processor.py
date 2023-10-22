@@ -14,7 +14,7 @@ class DocumentProcessor:
         self.input_folder = "forms"
         
         # TODO: Change output_folder to output_txt_data
-        self.output_folder = "output_docu"
+        self.output_folder = "output"
 
     def get_target_folder(self, form_name):
         form_name = form_name.lower()
