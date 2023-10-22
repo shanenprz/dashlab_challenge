@@ -8,13 +8,13 @@ import json
 class DocumentProcessor:
     def __init__(self):
         load_dotenv()
-        self.api_key = os.getenv("API_KEY")
-        self.endpoint = os.getenv("ENDPOINT")
-        self.model_id = os.getenv("MODEL_ID")
+        self.api_key = "4676d384d2f24ef7bdfd861de4f6d8f9"
+        self.endpoint = "https://seacertdashlabs.cognitiveservices.azure.com/"
+        self.model_id = "stablev1"
         self.input_folder = "forms"
         
         # TODO: Change output_folder to output_txt_data
-        self.output_folder = "output"
+        self.output_folder = "output_docu"
 
     def get_target_folder(self, form_name):
         form_name = form_name.lower()
