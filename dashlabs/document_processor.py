@@ -12,9 +12,7 @@ class DocumentProcessor:
         self.endpoint = os.getenv("ENDPOINT")
         self.model_id = os.getenv("MODEL_ID")
         self.input_folder = "forms"
-        
-        # TODO: Change output_folder to output_txt_data
-        self.output_folder = "output"
+        self.output_folder = "output_json"
 
     def get_target_folder(self, form_name):
         form_name = form_name.lower()
@@ -54,7 +52,14 @@ class DocumentProcessor:
         file_output_folder = os.path.join(self.output_folder, target_folder)
         os.makedirs(file_output_folder, exist_ok=True)
         output_file = os.path.join(file_output_folder, f"{os.path.splitext(file_name)[0]}.json".lower())
-        field_names_to_process = ["sense_of_responsibility", "emotional_stability", "objectivity", "motivation", "interpersonal_personal_adjustment", "goal_orientation"]  # Add your desired field names here
+        field_names_to_process = [
+            "sense_of_responsibility", 
+            "emotional_stability", 
+            "objectivity", 
+            "motivation", 
+            "interpersonal_personal_adjustment", 
+            "goal_orientation"
+            ] 
         data_dict = {}
 
         if "psychological evaluation form" in form_name.lower():
