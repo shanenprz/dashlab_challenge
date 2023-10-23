@@ -12,7 +12,7 @@ class JsonToCsvCombiner:
             dataframes = []  # Initialize a list to store DataFrames
 
             # Use a list comprehension to read and process JSON files in the current target folder
-            folder_path = os.path.join("output", target_folder)
+            folder_path = os.path.join("output_json", target_folder)
             json_files = [file for file in os.listdir(folder_path) if file.endswith(".json")]
             for json_file in json_files:
                 file_path = os.path.join(folder_path, json_file)

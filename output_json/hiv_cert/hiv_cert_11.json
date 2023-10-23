@@ -1,0 +1,23 @@
+{
+    "name": "WENSY GO",
+    "address": "ANTIPOLO CITY",
+    "age": "24",
+    "gender": "M",
+    "civil_status": "Single",
+    "date": "10/5/2023",
+    "form_name": "HUMAN IMMUNODEFICIENCY VIRUS (HIV) SCREENING TEST CERTIFICATE",
+    "certify_name": "PEDRO MAPALAD",
+    "physician": "WENSY GO",
+    "license_no": "321854",
+    "date_medical_exam": "10/5/23",
+    "is_rapid": "selected",
+    "is_particle": "selected",
+    "is_eia_cmia_elfa": "selected",
+    "is_others": "selected",
+    "nonreactive": "selected",
+    "reactive": "unselected",
+    "technologist": "LOREM IPSUM",
+    "hiv_cert_no": "521",
+    "expiry_ date": "10/5/2024",
+    "pathologist": "BERNIE DIMARII"
+}

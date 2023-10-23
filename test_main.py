@@ -1,33 +1,7 @@
-from dashlabs import DocumentProcessor
-from dashlabs import JsonToCsvCombiner
 from dashlabs import ColumnCleaning
-import pandas as pd
-import numpy as np
-
-
-# Process the documents
-document_processor = DocumentProcessor()
-document_processor.process_and_save_documents()
-
-# # Define the target folders and output folder
-# target_folders = [
-#     "hiv_cert",
-#     "med_exam_landbase",
-#     "med_exam_seafarers",
-#     "med_cert_landbase",
-#     "med_cert_seafarers",
-# ]
-# output_csv_folder = "output_uncleaned_csv"
-
-
-# # Create an instance of the class and call the method
-# combiner = JsonToCsvCombiner(target_folders, output_csv_folder)
-# combiner.combine_json_to_csv()
-
-
 
 # HIV Certificate 
-file_path = 'output_uncleaned_csv\hiv_cert\combined_data_hiv_cert.csv'
+file_path = 'output_csv\hiv_cert\combined_data_hiv_cert.csv'
 hiv_cert = ColumnCleaning(file_path)
 column_mapping = {
     'result': {'nonreactive': 'nonreactive', 'reactive': 'reactive'},
@@ -44,7 +18,7 @@ hiv_cert.create_csv(desired_columns_order, 'cleaned_hiv_record.csv')
 # ---------------------------------------------------------------------------------- #
 
 # Landbase Medical Certificate
-file_path = 'output_uncleaned_csv\med_cert_landbase\combined_data_med_cert_landbase.csv'
+file_path = 'output_csv\med_cert_landbase\combined_data_med_cert_landbase.csv'
 landbase_certificate = ColumnCleaning(file_path)
 column_mapping = {
     'gender': {'is_male': 'Male', 'is_female': 'Female'},
@@ -69,7 +43,7 @@ landbase_certificate.create_csv(desired_columns_order, 'cleaned_landbase_cert_re
 # ---------------------------------------------------------------------------------- #
 
 # Seabase Medical Certificate
-file_path = 'output_uncleaned_csv\med_cert_seafarers\combined_data_med_cert_seafarers.csv'
+file_path = 'output_csv\med_cert_seafarers\combined_data_med_cert_seafarers.csv'
 seabase_certificate = ColumnCleaning(file_path)
 column_mapping = {
     'gender': {'is_male': 'Male', 'is_female': 'Female'},
@@ -103,7 +77,7 @@ seabase_certificate.create_csv(desired_columns_order, 'cleaned_seabase_cert_reco
 # ---------------------------------------------------------------------------------- #
 
 # Landbase Medical Exam
-file_path = 'output_uncleaned_csv\med_exam_landbase\combined_data_med_exam_landbase.csv'
+file_path = 'output_csv\med_exam_landbase\combined_data_med_exam_landbase.csv'
 landbase_exam = ColumnCleaning(file_path)
 gender_and_status = {
     'gender': {'is_male': 'Male', 'is_female': 'Female'},
@@ -245,7 +219,7 @@ landbase_exam.create_csv(desired_columns_order, 'cleaned_landbase_exam_record.cs
 # ---------------------------------------------------------------------------------- #
 
 #Seabase Medical Exam
-file_path = 'output_uncleaned_csv\med_exam_seafarers\combined_data_med_exam_seafarers.csv'
+file_path = 'output_csv\med_exam_seafarers\combined_data_med_exam_seafarers.csv'
 seabase_exam = ColumnCleaning(file_path)
 gender_and_status = {
     'gender': {'is_male': 'Male', 'is_female': 'Female'},
