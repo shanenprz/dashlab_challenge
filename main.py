@@ -3,28 +3,74 @@ from dashlabs import JsonToCsvCombiner
 from dashlabs import ColumnCleaning
 import pandas as pd
 import numpy as np
+import os
+import time
+import threading
+from concurrent.futures import ThreadPoolExecutor
 
+# Define the input folder
+input_folder = "forms"
 
-# Process the documents
-document_processor = DocumentProcessor()
-document_processor.process_and_save_documents()
+# Get a list of files in the input folder
+file_list = os.listdir(input_folder)
+
+# Record the start time
+start_time = time.time()
+
+# Process each file with a new instance of DocumentProcessor
+for file in file_list:
+    if os.path.isfile(os.path.join(input_folder, file)):
+        doc_processor = DocumentProcessor()
+        doc_processor.process_single_document(os.path.join(input_folder, file), file)
+
+# Calculate and print the execution time
+end_time = time.time()
+execution_time = end_time - start_time
+print(f"Total execution time: {execution_time:.2f} seconds")
+
+# ##### RUNNING IN THREAD 
+
+# def process_documents_in_parallel(input_folder):
+#     # Get a list of files in the input folder
+#     file_list = os.listdir(input_folder)
+
+#     with ThreadPoolExecutor(max_workers=5) as executor:
+#         for file_name in file_list:
+#             if os.path.isfile(os.path.join(input_folder, file_name)):
+#                 doc_processor = DocumentProcessor()
+#                 executor.submit(doc_processor.process_single_document, os.path.join(input_folder, file_name), file_name)
+
+# if __name__ == "__main__":
+#     # Define the input folder
+#     input_folder = "forms"
+#     # Record the start time
+#     start_time = time.time()
+#     process_documents_in_parallel(input_folder)
+
+#     # Record the end time
+#     end_time = time.time()
+
+#     # Calculate the execution time
+#     execution_time = end_time - start_time
+
+#     print(f"Execution time: {execution_time} seconds")
+
 
 # Define the target folders and output folder
 target_folders = [
-    "hiv_cert",
-    "med_exam_landbase",
-    "med_exam_seafarers",
-    "med_cert_landbase",
-    "med_cert_seafarers",
+    "hiv_cert_json",
+    "med_landbase_cert_json",
+    "med_landbase_exam_json",
+    "psycho_eval_json",
+    "med_seafarers_cert_json",
+    "med_seafarers_exam_json"
+    
 ]
 output_csv_folder = "output_uncleaned_csv"
-
 
 # Create an instance of the class and call the method
 combiner = JsonToCsvCombiner(target_folders, output_csv_folder)
 combiner.combine_json_to_csv()
-
-
 
 # HIV Certificate 
 file_path = 'output_uncleaned_csv\hiv_cert\combined_data_hiv_cert.csv'
