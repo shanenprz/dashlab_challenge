@@ -6,15 +6,16 @@ import os
 import time
 import json
 from dotenv import load_dotenv
-import threading
+import tkinter as tk
+from tkinter import filedialog
+import shutil
 from concurrent.futures import ThreadPoolExecutor
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 from azure.core.serialization import AzureJSONEncoder
 
-
 class DocumentProcessor:
-    def __init__(self, input_folder):
+    def __init__(self):
         load_dotenv()
         self.mime = magic.Magic(mime=True, magic_file=find_library('magic'))
         self.supported_mime_types = [
@@ -24,6 +25,7 @@ class DocumentProcessor:
         ]
         self.endpoint, self.classifier_id, self.api_version, self.api_key = self.get_api_credentials()
         self.output_folder = "output_json"
+
     def get_api_credentials(self):
         return (
             os.getenv("ENDPOINT"),
@@ -66,7 +68,7 @@ class DocumentProcessor:
             status_response = requests.get(status_url, headers=headers)
             status_data = status_response.json()
             status = status_data['status']
-            print(status)
+            # print(status)
 
             if status == 'succeeded':
                 return self.process_analysis_result(status_data)
@@ -116,7 +118,7 @@ class DocumentProcessor:
             "landbase medical exam": "med_landbase_exam_json",
             "psychological evaluation form": "psycho_eval_json",
             "seafarers certificate": "med_seafarers_cert_json",
-            "seafarers medical exam": "med_seafarers_exam_json"
+            "seafarers medical exam": "med_seabased_exam_json"
         }
         target = target_folder.get(doc_type.lower())
         print(target)
@@ -163,6 +165,7 @@ class DocumentProcessor:
                                     for column, cell in row_value.value.items():
                                         if cell.value == 'selected':
                                             data_dict[column1_value] = column
+
                     else:
                         if isinstance(field.value, dict):
                             for key, value in field.value.items():
@@ -174,7 +177,7 @@ class DocumentProcessor:
         else:
             for document in result.documents:
                 for name, field in document.fields.items():
-                    field_value = field.value if field.value is not None else field.content
+                    field_value = field.value if field.value else field.content
                     data_dict[name] = field_value
 
         with open(output_file, "w") as json_file:
@@ -209,3 +212,62 @@ class DocumentProcessor:
             print("Response body:")
             print(response.text)
             return None
+
+def choose_file_or_folder():
+    root = tk.Tk()
+    root.withdraw()
+    option = input("Choose an option (1: Upload a File, 2: Upload a Folder): ")
+    input_path = ""
+    if option == "1":
+        input_path = filedialog.askopenfilename()  # Open a file dialog to choose a file
+    elif option == "2":
+        input_path = filedialog.askdirectory()  # Open a dialog to choose a folder
+    root.destroy()  # Close the main window
+    return input_path
+
+def process_documents_in_parallel(input_folder):
+    # Get a list of files in the input folder
+    file_list = os.listdir(input_folder)
+
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        for file_name in file_list:
+            if os.path.isfile(os.path.join(input_folder, file_name)):
+                doc_processor = DocumentProcessor()
+                executor.submit(doc_processor.process_single_document, os.path.join(input_folder, file_name), file_name)
+
+if __name__ == "__main__":
+    input_path = choose_file_or_folder()
+    print(f"Selected path: {input_path}")
+    if not input_path:
+        print("No file or folder selected. Exiting...")
+    else:
+        # Ensure the target folder exists
+        target_folder = "forms_uploaded"
+        os.makedirs(target_folder, exist_ok=True)
+
+        if os.path.isfile(input_path):
+            # If a single file is chosen, copy it to the target folder
+            file_name = os.path.basename(input_path)
+            target_path = os.path.join(target_folder, file_name)
+            shutil.copy(input_path, target_path)
+        elif os.path.isdir(input_path):
+            # If a folder is chosen, copy all files (excluding .env) to the target folder
+            for file_name in os.listdir(input_path):
+                if file_name != ".env":
+                    src_path = os.path.join(input_path, file_name)
+                    dest_path = os.path.join(target_folder, file_name)
+                    shutil.copy(src_path, dest_path)
+
+        # Record the start time
+        start_time = time.time()
+        
+        # Process documents in parallel
+        process_documents_in_parallel(target_folder)
+        
+        # Record the end time
+        end_time = time.time()
+
+        # Calculate the execution time
+        execution_time = end_time - start_time
+
+        print(f"Execution time: {execution_time} seconds")
