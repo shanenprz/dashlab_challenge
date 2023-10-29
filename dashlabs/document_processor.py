@@ -74,7 +74,7 @@ class DocumentProcessor:
                 print("Analysis failed. Returning None")
                 return None
             else:
-                time.sleep(0.001)
+                time.sleep(5)
 
     def process_analysis_result(self, status_data):
         if 'analyzeResult' in status_data:
