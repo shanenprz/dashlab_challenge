@@ -52,11 +52,18 @@ if os.path.exists(source_json_folder) and os.path.isdir(source_json_folder):
     for folder in folder_list:
         
         if folder == "hiv_cert_json":
-            column_order = [
-                'form name', 'physician', 'license number', 'date medical exam',
-                'date', 'name', 'age', 'gender', 'civil status', 'address', 
+            personal_data = [
+                'form name', 'certify name', 'physician', 'license number', 'date medical exam',
+                'date', 'name', 'age', 'gender', 'civil status', 'address'
+            ]
+            results = [
                 'screening test', 'result','technologist', 'hiv cert number', 'pathologist'
             ]
+            other_details = [
+                
+            ]
+            
+            column_order = [ ]
         elif folder == "med_landbase_exam_json":
             personal_data = [
                 "form name","last name","first name","middle name","age","date of birth","place of birth",
