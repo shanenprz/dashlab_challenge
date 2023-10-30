@@ -56,14 +56,27 @@ if os.path.exists(source_json_folder) and os.path.isdir(source_json_folder):
                 'form name', 'certify name', 'physician', 'license number', 'date medical exam',
                 'date', 'name', 'age', 'gender', 'civil status', 'address'
             ]
-            results = [
-                'screening test', 'result','technologist', 'hiv cert number', 'pathologist'
-            ]
-            other_details = [
-                
+            results_and_other_details = [
+                'screening test', 'result','technologist', 'hiv cert number', 'expiry date', 'pathologist'
             ]
             
-            column_order = [ ]
+            column_order = [*personal_data, *results_and_other_details]
+        
+        elif folder == "med_seafarers_cert_model":
+            personal_data = [
+                'form name', 'surname', 'first name', 'middle name', 'age', 'date of birth', 'place of birth',
+                'nationality', 'gender', 'civil status', 'religion', 'address', 'passport number', 'seaman book number',
+                'position', 'company']
+            declarations = [
+                'documents checked', 'hearing stwcode', 'unaided hearing', 'visual acuity', 'colour vision', 
+                'date of last colour vision test', 'visual', 'lookout duties', 'restrictions', 'suffer med condition'
+            ]
+            other_details = [
+                'exam given to', 'result', 'physician', 'date of exam', 'med director', 'issuing auth', 'address auth',
+                'certifying auth', 'license number', 'seaferer signature', 'signature date', 'date of issuance', 'date of expiry'
+            ]
+            column_order = [*personal_data, *declarations, *other_details]
+            
         elif folder == "med_landbase_exam_json":
             personal_data = [
                 "form name","last name","first name","middle name","age","date of birth","place of birth",
