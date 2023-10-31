@@ -14,32 +14,109 @@ from utils import process_documents_in_parallel
 from dashlabs import DocumentProcessor
 from dashlabs import ColumnCleaning
 
-if __name__ == "__main__":
-    input_path = choose_file_or_folder()
-    print(f"Selected path: {input_path}")
-    if not input_path:
-        print("No file or folder selected. Exiting...")
-    else:
-        # Ensure the target folder exists
-        target_folder = "forms_uploaded"
-        os.makedirs(target_folder, exist_ok=True)
+# if __name__ == "__main__":
+    # input_path = choose_file_or_folder()
+    # print(f"Selected path: {input_path}")
+    # if not input_path:
+    #     print("No file or folder selected. Exiting...")
+    # else:
+    #     # Ensure the target folder exists
+    #     target_folder = "forms_uploaded"
+    #     os.makedirs(target_folder, exist_ok=True)
 
-        if os.path.isfile(input_path):
-            # If a single file is chosen, copy it to the target folder
-            file_name = os.path.basename(input_path)
-            target_path = os.path.join(target_folder, file_name)
-            shutil.copy(input_path, target_path)
-        elif os.path.isdir(input_path):
-            # If a folder is chosen, copy all files (excluding .env) to the target folder
-            for file_name in os.listdir(input_path):
-                if file_name != ".env":
-                    src_path = os.path.join(input_path, file_name)
-                    dest_path = os.path.join(target_folder, file_name)
-                    shutil.copy(src_path, dest_path)
+    #     if os.path.isfile(input_path):
+    #         # If a single file is chosen, copy it to the target folder
+    #         file_name = os.path.basename(input_path)
+    #         target_path = os.path.join(target_folder, file_name)
+    #         shutil.copy(input_path, target_path)
+    #     elif os.path.isdir(input_path):
+    #         # If a folder is chosen, copy all files (excluding .env) to the target folder
+    #         for file_name in os.listdir(input_path):
+    #             if file_name != ".env":
+    #                 src_path = os.path.join(input_path, file_name)
+    #                 dest_path = os.path.join(target_folder, file_name)
+    #                 shutil.copy(src_path, dest_path)
 
-        # Process documents in parallel
-        process_documents_in_parallel(target_folder)
-        
+    #     # Process documents in parallel
+    #     process_documents_in_parallel(target_folder)
+
+# Create a tkinter GUI
+root = tk.Tk()
+root.title("Document Processing Tool")
+
+# Target folders
+target_folder = "forms_uploaded"
+processed_folder = "processed_forms"
+
+# Function to process the selected file or folder
+def process_documents(input_path):
+    os.makedirs(target_folder, exist_ok=True)
+
+    if os.path.isfile(input_path):
+        # If a single file is chosen, copy it to the target folder
+        file_name = os.path.basename(input_path)
+        target_path = os.path.join(target_folder, file_name)
+        shutil.copy(input_path, target_path)
+    elif os.path.isdir(input_path):
+        # If a folder is chosen, copy all files (excluding .env) to the target folder
+        for file_name in os.listdir(input_path):
+            if file_name != ".env":
+                src_path = os.path.join(input_path, file_name)
+                dest_path = os.path.join(target_folder, file_name)
+                shutil.copy(src_path, dest_path)
+
+    # Process documents in parallel
+    process_documents_in_parallel(target_folder)
+    move_processed_files(target_folder)
+
+def move_processed_files(src_folder):
+    os.makedirs(processed_folder, exist_ok=True)
+    for filename in os.listdir(src_folder):
+        src_path = os.path.join(src_folder, filename)
+        dest_path = os.path.join(processed_folder, filename)
+        shutil.move(src_path, dest_path)
+
+# Function to process a single file or folder
+def process_file_or_folder(option):
+    input_path = filedialog.askopenfilename() if option == "1" else filedialog.askdirectory()
+    if input_path:
+        processing_thread = threading.Thread(target=process_documents, args=(input_path,))
+        processing_thread.start()
+
+# Create buttons for processing a single file or a folder
+process_file_button = tk.Button(root, text="Process a Single File", command=lambda: process_file_or_folder("1"))
+process_folder_button = tk.Button(root, text="Process a Folder", command=lambda: process_file_or_folder("2"))
+process_file_button.pack()
+process_folder_button.pack()
+
+# Function to generate CSV files for download
+def generate_csv_files():
+    for filename in os.listdir(processed_folder):
+        if filename.endswith(".json"):
+            json_folder = os.path.join(processed_folder, filename)
+            combiner = ColumnCleaning(json_folder, processed_folder)
+            column_order = combiner.get_column_order()
+            combiner.combine_json_to_csv(column_order)
+
+generate_csv_button = tk.Button(root, text="Generate CSV Files", command=generate_csv_files)
+generate_csv_button.pack()
+
+# Function to list and download the generated CSV files
+def list_and_download_csv_files():
+    csv_files = [filename for filename in os.listdir(processed_folder) if filename.endswith(".csv")]
+    for filename in csv_files:
+        download_button = tk.Button(root, text=f"Download {filename}", command=lambda filename=filename: download_csv(filename))
+        download_button.pack()
+
+def download_csv(filename):
+    csv_path = os.path.join(processed_folder, filename)
+    os.system(f"start excel.exe {csv_path}")
+
+list_and_download_button = tk.Button(root, text="List and Download CSV Files", command=list_and_download_csv_files)
+list_and_download_button.pack()
+
+# Start the tkinter main loop
+root.mainloop()
 
 ###################################################################################################################################
 # COLUMN CLEANING ## 
